@@ -1,6 +1,6 @@
 ---
 layout: post
-date: 2026-08-08 20:30:00 -0400
+date: 2026-08-08 19:15:00 -0400
 title: "What Search Party actually pays for"
 tags: [osint, tracelabs, ctf, methodology]
 ---
