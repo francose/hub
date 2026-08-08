@@ -9,7 +9,7 @@
   --ink-soft:   #55503f;
   --ink-faint:  #8c8676;
 
-  --measure: 40rem;
+  --measure: 44rem;
   --display: "Times New Roman", Times, "Liberation Serif", serif;
   --body: Georgia, "Iowan Old Style", "Palatino Linotype", serif;
 }
@@ -70,9 +70,10 @@ a:hover { background: var(--ink); color: var(--paper); text-decoration: none; }
   margin: 0;
   font-family: var(--display);
   font-weight: 700;
-  font-size: clamp(2.1rem, 8vw, 3.9rem);
-  line-height: 1.02;
+  font-size: clamp(1.85rem, 6vw, 3rem);
+  line-height: 1.06;
   letter-spacing: -0.015em;
+  text-wrap: balance;
 }
 .nameplate a { text-decoration: none; }
 .nameplate a:hover { background: none; color: inherit; }
@@ -260,7 +261,8 @@ hr.rule-thin {
 .colophon {
   max-width: var(--measure);
   margin: 4rem auto 0;
-  padding-top: 1rem;
+  padding-top: .9rem;
+  padding-bottom: .4rem;
   border-top: 3px solid var(--ink);
   text-align: center;
   font-family: var(--display);
@@ -270,7 +272,6 @@ hr.rule-thin {
   color: var(--ink-soft);
 }
 .colophon a { margin: 0 .5rem; text-decoration: none; border-bottom: 1px solid var(--ink-faint); }
-.setline { letter-spacing: .1em; color: var(--ink-faint); }
 
 @media (max-width: 34rem) {
   .folio { flex-direction: column; gap: .15rem; text-align: center; font-size: .62rem; }

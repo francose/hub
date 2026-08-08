@@ -1,7 +1,14 @@
-<!-- masthead, folio bar, section line, then the page -->
-{% seo %}
-{% feed_meta %}
-<link rel="stylesheet" href="{{ '/assets/css/paper.css' | relative_url }}">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="{{ '/assets/nameplate.svg' | relative_url }}" type="image/svg+xml">
+  <link rel="stylesheet" href="{{ '/assets/css/paper.css' | relative_url }}">
+  {%- seo -%}
+  {%- feed_meta -%}
+</head>
+<body>
 
 <a class="skip" href="#main">Skip to content</a>
 
@@ -39,5 +46,7 @@
     <a href="https://github.com/francose">GitHub</a>
     <a href="{{ '/feed.xml' | relative_url }}">Feed</a>
   </p>
-  <p class="setline">Set in Times and Georgia. Public work only.</p>
 </footer>
+
+</body>
+</html>
