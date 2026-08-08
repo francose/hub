@@ -13,9 +13,9 @@ An Empirical Study of CWE-787 and CWE-125 Across Build Modes. Preprint, July
 
 Zig keeps C-style manual memory management and adds runtime bounds checks, but
 only in Debug and ReleaseSafe. ReleaseFast and ReleaseSmall drop them. I wrote
-four small programs — an out-of-bounds read that leaks a secret, a write that
+four small programs (an out-of-bounds read that leaks a secret, a write that
 corrupts an adjacent flag, a write that hijacks control flow, and a many-item
-pointer read — and ran each under all four modes.
+pointer read) and ran each under all four modes.
 
 The same source panics safely in the checked modes and becomes a working
 exploit primitive in the unchecked ones. Nothing changes but the optimisation

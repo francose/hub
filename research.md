@@ -4,7 +4,7 @@ title: Research
 permalink: /research/
 ---
 
-What I'm working on. Each area has something public attached to it — a
+What I'm working on. Each area has something public attached to it: a
 contribution, a tool, or a paper.
 
 ## Adversarial evaluation of LLM and agentic systems
@@ -36,12 +36,12 @@ SCALIBR's datasource client.
 
 ## Encoding and parser attack surface
 
-Unicode attacks that get through review because the text looks fine — Trojan
+Unicode attacks that get through review because the text looks fine. Trojan
 Source, homographs, overlong UTF-8, null-byte truncation. PoCs and a defender
 scanner in [bidi_poc](https://github.com/francose/bidi_poc).
 
 Related: memory safety across build modes in languages that claim to give it to
-you for free. Wrote that one up — see
+you for free. Wrote that one up, see
 [publications]({{ '/publications/' | relative_url }}).
 
 ## Messaging identity
@@ -54,13 +54,12 @@ defender scanner in
 ## Passive RF sensing
 
 Presence and motion detection off WiFi signal analysis. No cameras, no
-wearables. I care about it as a privacy surface — commodity hardware that
-senses through walls is a collection capability whether anyone called it that
-or not.
+wearables. I care about it as a privacy surface. Commodity hardware that senses
+through walls is a collection capability whether anyone called it that or not.
 
 ## OSINT tradecraft
 
 Passive collection, pivot chains, and documenting a finding so someone else can
-audit the reasoning. Also the product side of it —
+audit the reasoning. Also the product side of it:
 [Sleuthgraph]({{ '/projects/' | relative_url }}) is an open-source
 investigation workbench.

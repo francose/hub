@@ -7,7 +7,7 @@ Live at https://francose.github.io/hub/
 
 ## What goes here
 
-Public work only. The default is off — something gets listed here after it is
+Public work only. The default is off. Something gets listed here after it is
 already public somewhere else, not before.
 
 Explicitly out of scope, permanently:
@@ -21,24 +21,24 @@ Explicitly out of scope, permanently:
 - Private repos. If the repo is private, it does not get an entry.
 
 Upstream PR state is asserted on the Projects page. Verify against the GitHub
-API before changing merged/open — a hub claiming merged work that isn't is
+API before changing merged/open. A hub claiming merged work that isn't is
 worse than no hub.
 
 ## Structure
 
-- `index.md` — landing
-- `research.md` — active areas, each anchored to a public artifact
-- `projects.md` — upstream contributions and own tools
-- `notes.md` — post index
-- `toolkit.md` — tools by job
-- `_posts/` — the findings themselves
+- `index.md`: landing
+- `research.md`: active areas, each anchored to a public artifact
+- `projects.md`: upstream contributions and own tools
+- `notes.md`: post index
+- `toolkit.md`: tools by job
+- `_posts/`: the findings themselves
 
 Nav order is set by `header_pages` in `_config.yml`.
 
 ## Format for notes
 
 Short findings, not tutorials. What was tried, what held up, what didn't, and
-what I'm not claiming. Under 400 words is the target —
+what I'm not claiming. Under 400 words is the target.
 `_drafts/post-template.md` has the shape. Longer pieces are the exception.
 
 ## Writing a post
@@ -62,7 +62,7 @@ Anything in `_drafts/` is ignored by the live build.
 ## Local preview
 
 Optional. GitHub builds the site, so nothing needs to be installed here to
-publish — write markdown, push, done.
+publish. Write markdown, push, done.
 
 Preview requires a Ruby toolchain, which this machine does not have:
 

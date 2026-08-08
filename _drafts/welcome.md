@@ -5,7 +5,7 @@ tags: [meta]
 ---
 
 I keep redoing the same OSINT work because I never wrote down what worked the
-last time. Every Search Party CTF, every engagement, same thing — I rebuild the
+last time. Every Search Party CTF, every engagement, same thing. I rebuild the
 methodology from scratch and rediscover the same dead ends.
 
 So this is the notebook. Tradecraft, pivots that paid off, sources that turned

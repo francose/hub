@@ -9,8 +9,9 @@ Grouped by the job, not the vendor. Tools churn; the jobs don't.
 ## Adversarial ML evaluation
 
 PyRIT for scored, repeatable attack runs. The scoring harness is the part that
-matters — an attack you can't measure is a demo. garak for probe-based scanning
-across a model surface. Both are worth reading as codebases, not just running.
+matters, because an attack you can't measure is a demo. garak for probe-based
+scanning across a model surface. Both are worth reading as codebases, not just
+running.
 
 ## OSINT collection
 
@@ -23,6 +24,6 @@ notification is out of scope for passive collection.
 
 ## Writing it down
 
-Every finding gets a repro path attached at the moment I find it — command,
-query, or source URL — not reconstructed afterwards. A finding I can't
+Every finding gets a repro path attached at the moment I find it, a command, a
+query, or a source URL, not reconstructed afterwards. A finding I can't
 re-evidence is a finding I can't defend.

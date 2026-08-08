@@ -8,7 +8,7 @@ Sadik Erisen. Security engineer.
 
 Three things overlap here and keep turning out to be the same problem.
 
-**AI security.** Attacks on LLM and agentic systems — prompt injection, tool
+**AI security.** Attacks on LLM and agentic systems: prompt injection, tool
 poisoning, sandbox escape, agent egress. What reproduces, and what was only
 ever a demo.
 

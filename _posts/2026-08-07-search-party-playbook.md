@@ -7,7 +7,7 @@ tags: [osint, tracelabs, ctf, methodology]
 
 Four hours, one missing person, a brief that's usually three paragraphs and a
 police URL. Trace Labs Search Party gives you no infrastructure to attack and no
-flags to capture in the normal sense — the only thing that scores is
+flags to capture in the normal sense. The only thing that scores is
 intelligence a human judge agrees is new and actionable.
 
 This is the framework I run, why it's shaped the way it is, and what the
@@ -37,7 +37,7 @@ submitting.
 Work it in this order. Each rung produces the selectors for the next one.
 
 **The brief.** Read it as a list of things you're not allowed to submit. Every
-detail in it is already with law enforcement. Its value is selectors — full
+detail in it is already with law enforcement. Its value is selectors: full
 legal name including middle names, age at disappearance, the geography, the
 institution or employer, the date. Names in the brief are the seed, not the
 finding.
@@ -56,7 +56,7 @@ primary source and a completely different animal.
 profile photos, a display-name convention, sometimes a partial email or phone
 from a poorly configured privacy setting. These are what you pivot on. A
 username reused across platforms is the classic chain, but it only counts if you
-can prove the accounts are the same person — a common handle with no
+can prove the accounts are the same person. A common handle with no
 corroborating evidence gets rejected, and rightly.
 
 **Community originals.** Research forums where people do their own digging can
@@ -74,7 +74,7 @@ less than knowing which of these four things you're doing, and tools churn.
 
 **Username enumeration across platforms.** Feed a handle from the primary
 account, get back candidate profiles elsewhere. Fast and high-volume, and it
-generates far more noise than signal — treat every hit as unconfirmed until
+generates far more noise than signal, so treat every hit as unconfirmed until
 something correlates it to your subject. This is where people burn an hour and
 submit garbage.
 
@@ -121,13 +121,13 @@ you should have with them.
 **Anything you sourced twice.** One scoring submission per unique URL.
 Splitting one source across multiple categories reads as gaming the system,
 which sits closer to a DQ risk than a rejection. Your URLs are the scarce
-resource, not your time — decide what a source is worth and pitch it once, in
+resource, not your time. Decide what a source is worth and pitch it once, in
 the highest category it honestly supports.
 
 **Category mismatches.** Read the definitions literally. Advancing the Timeline
 wants activity from the subject's *own* accounts after the missing date, not a
 third-party sighting reported later. I submitted post-disappearance sightings
-and read the rejection as a judgment call when it was a category mismatch —
+and read the rejection as a judgment call when it was a category mismatch.
 they were never eligible. Same literalism on advanced subject info, which wants
 identifiers not already in press or police reports. If the police page mentions
 it, it isn't advanced.
