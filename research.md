@@ -4,67 +4,63 @@ title: Research
 permalink: /research/
 ---
 
-Areas I'm actively working. Each one is anchored to something public — a
-contribution, a tool, or a writeup. If there's no artifact next to it, it isn't
-listed yet.
+What I'm working on. Each area has something public attached to it — a
+contribution, a tool, or a paper.
 
 ## Adversarial evaluation of LLM and agentic systems
 
-The bulk of it. Prompt injection that survives a real pipeline rather than a
-demo, scoring harnesses that detect it, and jailbreak techniques worth
-implementing in a framework other people run.
+Most of my time. Injection that survives a real pipeline, scoring harnesses
+that measure it, and jailbreak techniques worth putting into a framework other
+people run.
 
-Concretely: prompt injection scoring and credential-leak detection in
-[PyRIT]({{ '/projects/' | relative_url }}), a Best-of-N jailbreak attack
-implementation, a PDF injection probe for garak, and an OWASP LLM02 output
-validator.
+The work so far: prompt injection and credential-leak scoring in PyRIT, a
+Best-of-N jailbreak implementation, a PDF injection probe for garak, an OWASP
+LLM02 output validator.
 
-Open question I keep circling: most published injection results are measured
-against a bare model. The interesting number is how much of it survives a
-retrieval pipeline with a system prompt, a tool allowlist, and an output filter
-in front of it. That gap is where the real risk estimate lives.
+One thing I keep coming back to. Most published injection results are measured
+against a bare model. The number I want is how much of it still works with a
+retrieval pipeline, a system prompt, a tool allowlist, and an output filter in
+the way. That gap is the actual risk estimate, and almost nobody reports it.
 
 ## Agent containment and egress
 
-If an agent can reach the network, most other controls are advisory. Interested
-in capability scoping, token exchange patterns, and egress as the actual
-control plane rather than sandboxing as a checkbox.
+An agent that can reach the network makes most other controls advisory.
+Capability scoping, token exchange, and treating egress as the control plane
+rather than sandboxing as a checkbox.
 
-Determinism in a sandbox is not the same property as soundness, and the two get
-conflated constantly.
+## Supply chain
 
-## Supply chain and dependency security
-
-Contributions to Google's OSV tooling — a crash fix in the scanner's version
-comparison, and blocking external plaintext HTTP registries by default in
-SCALIBR's Maven client. Small changes, but the failure modes are the kind that
-matter at scale.
+Contributions to Google's OSV tooling. A crash fix in the scanner's version
+comparison, and blocking plaintext HTTP Maven registries by default in
+SCALIBR's datasource client.
 
 ## Encoding and parser attack surface
 
-Unicode and encoding attacks that slip past review because the text looks
-normal — Trojan Source, homograph substitution, overlong UTF-8, null-byte
-truncation. Runnable PoCs plus a defender-side scanner in
-[bidi_poc](https://github.com/francose/bidi_poc).
+Unicode attacks that get through review because the text looks fine — Trojan
+Source, homographs, overlong UTF-8, null-byte truncation. PoCs and a defender
+scanner in [bidi_poc](https://github.com/francose/bidi_poc).
 
-Adjacent: fuzzing PDF parsers, and memory safety failure modes across build
-modes in languages that claim to prevent them.
+Related: memory safety across build modes in languages that claim to give it to
+you for free. Wrote that one up — see
+[publications]({{ '/publications/' | relative_url }}).
 
 ## Messaging identity
 
-Sender verification and impersonation surface in carrier and business messaging
-— email-to-SMS gateways, RCS and iMessage business channels. Study material and
-PoCs in [sms_gateway_poc](https://github.com/francose/sms_gateway_poc),
-defender scanner included.
+Sender verification and impersonation surface in carrier and business
+messaging. Email-to-SMS gateways, RCS, iMessage business channels. PoCs and a
+defender scanner in
+[sms_gateway_poc](https://github.com/francose/sms_gateway_poc).
 
-## RF and passive sensing
+## Passive RF sensing
 
-Presence and motion detection from WiFi signal analysis, no cameras and no
-wearables. Interesting to me as a privacy surface more than as a product —
-commodity hardware that senses through walls is a collection capability whether
-or not anyone framed it that way.
+Presence and motion detection off WiFi signal analysis. No cameras, no
+wearables. I care about it as a privacy surface — commodity hardware that
+senses through walls is a collection capability whether anyone called it that
+or not.
 
 ## OSINT tradecraft
 
-Passive collection methodology, pivot chains, and the discipline of documenting
-a finding so the reasoning is auditable. See the [notes]({{ '/notes/' | relative_url }}).
+Passive collection, pivot chains, and documenting a finding so someone else can
+audit the reasoning. Also the product side of it —
+[Sleuthgraph]({{ '/projects/' | relative_url }}) is an open-source
+investigation workbench.

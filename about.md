@@ -4,19 +4,22 @@ title: About
 permalink: /about/
 ---
 
-Short findings from three areas that keep overlapping:
+Sadik Erisen. Security engineer. Co-founder of ThinkEngine.
 
-**AI security research.** Attacks against LLM and agentic systems — prompt
-injection, tool poisoning, sandbox escape, agent egress. What actually
-reproduces, and what turns out to be a demo.
+Three things overlap here and keep turning out to be the same problem.
 
-**OPSEC.** Operational security for people doing collection, and the other
-direction — what collection reveals about people who thought they were careful.
+**AI security.** Attacks on LLM and agentic systems — prompt injection, tool
+poisoning, sandbox escape, agent egress. What reproduces, and what was only
+ever a demo.
 
-**OSINT.** Tradecraft, pivots, and tooling. Passive collection against public
+**OPSEC.** Operational security for people doing collection, and the reverse:
+what collection turns up on people who thought they were careful.
+
+**OSINT.** Tradecraft, pivots, tooling. Passive collection against public
 sources.
 
-Written by jynx_84999.
+[ORCID](https://orcid.org/0009-0006-9637-6345) ·
+[GitHub](https://github.com/francose)
 
-Posts here are findings, not tutorials. Short by design: what was tried, what
-held up, what didn't. No case material and no client work.
+Everything here is public work. No case material, no client work, nothing from
+the day job.

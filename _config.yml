@@ -1,6 +1,6 @@
-title: jynx
+title: Jynx_84999 | Sadik Erisen
 description: Security research index. Adversarial ML, supply chain, OSINT tradecraft, and short findings.
-author: jynx_84999
+author: Sadik Erisen
 
 url: "https://francose.github.io"
 baseurl: "/hub"
@@ -8,6 +8,7 @@ baseurl: "/hub"
 header_pages:
   - research.md
   - projects.md
+  - publications.md
   - notes.md
   - toolkit.md
   - about.md
