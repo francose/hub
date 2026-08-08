@@ -10,6 +10,7 @@
   --ink-faint:  #8c8676;
 
   --measure: 44rem;
+  --frame: 52rem;
   --display: "Times New Roman", Times, "Liberation Serif", serif;
   --body: Georgia, "Iowan Old Style", "Palatino Linotype", serif;
 }
@@ -51,7 +52,7 @@ a:hover { background: var(--ink); color: var(--paper); text-decoration: none; }
 /* ---- masthead ---- */
 
 .masthead {
-  max-width: var(--measure);
+  max-width: var(--frame);
   margin: 0 auto;
   padding-top: 2.75rem;
   text-align: center;
@@ -259,7 +260,7 @@ hr.rule-thin {
 /* ---- colophon ---- */
 
 .colophon {
-  max-width: var(--measure);
+  max-width: var(--frame);
   margin: 4rem auto 0;
   padding-top: .9rem;
   padding-bottom: .4rem;
