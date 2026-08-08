@@ -20,14 +20,14 @@ pipeline works. Sleuthgraph is an open-source OSINT investigation workbench,
 graph-native and built around pivots. I lead ThinkEngine, which is being open
 sourced at Comcast.
 
-I do CTFs — OSINT search parties, and I'm working through OSCP material — and I
-run bug bounty on the side. Both are the same appeal: a scoreboard is an
-unusually honest referee. You either found the thing or you didn't, and nobody
-grades your methodology section.
+CTFs regularly, mostly with my team at Comcast, plus OSINT search parties on my
+own. Bug bounty on Bugcrowd. Currently working toward OSAI, OffSec's AI red
+team cert — attacking LLMs, RAG pipelines and multi-agent systems is the same
+problem I spend the rest of my time on, so it lines up.
 
-Formally: MSE in Software Systems and Cybersecurity from Penn, CISSP, CEH,
-Security+, CCNA. One [preprint]({{ '/publications/' | relative_url }}) so far,
-on out-of-bounds memory access in Zig across build modes.
+MSE in Software Systems and Cybersecurity from Penn. CISSP, CEH, Security+,
+CCNA. One [preprint]({{ '/publications/' | relative_url }}) so far, on
+out-of-bounds memory access in Zig across build modes.
 
 This site is the working notes. Research is what I'm on now, projects is what
 I've shipped, notes are short findings — what I tried, what held, what didn't,
