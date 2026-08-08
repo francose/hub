@@ -1,9 +1,16 @@
-title: jynx notes
-description: Short findings on AI security research, OPSEC, and OSINT tradecraft.
+title: jynx
+description: Security research index. Adversarial ML, supply chain, OSINT tradecraft, and short findings.
 author: jynx_84999
 
 url: "https://francose.github.io"
-baseurl: "/osint-blog"
+baseurl: "/hub"
+
+header_pages:
+  - research.md
+  - projects.md
+  - notes.md
+  - toolkit.md
+  - about.md
 
 theme: minima
 minima:
