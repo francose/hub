@@ -1,5 +1,6 @@
 ---
 layout: post
+date: 2026-08-07 21:00:00 -0400
 title: "A Search Party playbook: pivots, framework, tooling"
 tags: [osint, tracelabs, ctf, methodology]
 ---
