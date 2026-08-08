@@ -1,0 +1,24 @@
+title: OSINT Notes
+description: Open source intelligence tradecraft, casework methodology, and tooling notes.
+author: Sadik Erisen
+
+url: "https://francose.github.io"
+baseurl: "/osint-blog"
+
+theme: minima
+minima:
+  skin: dark
+
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-sitemap
+
+permalink: /:year/:month/:title/
+timezone: America/New_York
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - vendor
