@@ -6,14 +6,32 @@ permalink: /projects/
 
 ## ThinkEngine
 
-AI security platform — agent orchestrator, remediation pipeline, tenant
-isolation down to per-org key material. Multi-tenant and deployed. Going fully
-open source.
+AI security platform — agent orchestrator, remediation pipeline, multi-tenant
+isolation. Deployed and running. Lead and main contributor; it's being open
+sourced at Comcast.
 
 [docs](https://github.com/thinkengineio/docs)
 
-**Sleuthgraph** is the OSINT investigation workbench built on it, already open
-source. Graph-native, organised around pivots rather than search results.
+## Sentinel
+
+Endpoint security agent, written in Go from scratch, cross-platform on macOS
+and Linux. Collects system and network telemetry, does CIS hardening checks,
+file integrity monitoring, vulnerability and threat detection, package and
+service inventory, and credential scanning. Ships remediation actions rather
+than only alerting.
+
+The part I like most is ATTM — an adversarial testing module built into the
+agent. It generates synthetic events mapped to 19 MITRE ATT&CK techniques and
+sends them through the real ingestion path, so you find out whether your
+detection and alerting actually fire instead of assuming they do. Everything it
+emits is tagged synthetic so it can't contaminate real findings.
+
+Currently closed source.
+
+## Sleuthgraph
+
+Mine. Open-source OSINT investigation workbench, graph-native, organised around
+pivots rather than search results.
 
 - [sleuthgraph](https://github.com/thinkengineio/sleuthgraph) — meta repo, docs, compose
 - [sleuthgraph-api](https://github.com/thinkengineio/sleuthgraph-api) — FastAPI, Postgres + AGE, plugin SDK
