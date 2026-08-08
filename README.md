@@ -24,9 +24,15 @@ Push to `main` and Pages rebuilds. Takes about a minute.
 
 ## Local preview
 
+Optional. GitHub builds the site, so nothing needs to be installed here to
+publish — write markdown, push, done.
+
+Preview requires a Ruby toolchain, which this machine does not have:
+
 ```
+sudo apt install ruby-full build-essential
 bundle install
-bundle exec jekyll serve
+bundle exec jekyll serve --drafts
 ```
 
 Then http://127.0.0.1:4000/osint-blog/
