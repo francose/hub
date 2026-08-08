@@ -1,8 +1,15 @@
 # osint-blog
 
-Jekyll source for my OSINT notes. Builds on GitHub Pages from `main`.
+Jekyll source for my notes on AI security research, OPSEC, and OSINT. Builds on
+GitHub Pages from `main`.
 
 Live at https://francose.github.io/osint-blog/
+
+## Format
+
+Short findings, not tutorials. What was tried, what held up, what didn't, and
+what I'm not claiming. Under 400 words is the target — `_drafts/post-template.md`
+has the shape. Longer pieces are the exception, not the default.
 
 ## Writing a post
 
@@ -13,9 +20,13 @@ Drop a file in `_posts/` named `YYYY-MM-DD-slug.md` with front matter:
 layout: post
 title: "Title here"
 date: 2026-08-07 20:00:00 -0400
-tags: [osint, methodology]
+tags: [ai-security]
 ---
 ```
+
+Tag with one of `ai-security`, `opsec`, `osint` as the first tag, then whatever
+else is useful. Keeping the vocabulary small is what makes the tags worth
+having.
 
 Anything in `_drafts/` is ignored by the live build. Preview drafts locally with
 `bundle exec jekyll serve --drafts`.

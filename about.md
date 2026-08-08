@@ -4,11 +4,19 @@ title: About
 permalink: /about/
 ---
 
-Notes on open source intelligence work — tradecraft, casework methodology, and
-tooling.
+Short findings from three areas that keep overlapping:
+
+**AI security research.** Attacks against LLM and agentic systems — prompt
+injection, tool poisoning, sandbox escape, agent egress. What actually
+reproduces, and what turns out to be a demo.
+
+**OPSEC.** Operational security for people doing collection, and the other
+direction — what collection reveals about people who thought they were careful.
+
+**OSINT.** Tradecraft, pivots, and tooling. Passive collection against public
+sources.
 
 Written by jynx_84999.
 
-Everything here is passive collection against public sources. Nothing on this
-site is client work, and no case material appears without it being public
-already.
+Posts here are findings, not tutorials. Short by design: what was tried, what
+held up, what didn't. No case material and no client work.
