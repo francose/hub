@@ -6,14 +6,14 @@ permalink: /projects/
 
 ## ThinkEngine
 
-Co-founder. I built the platform — an AI security platform with an agent
-orchestrator, a remediation pipeline, and tenant isolation down to per-org key
-material. Multi-tenant, deployed, running.
+AI security platform — agent orchestrator, remediation pipeline, tenant
+isolation down to per-org key material. Multi-tenant and deployed. Going fully
+open source.
 
-[thinkengine.io](https://thinkengine.io) · [docs](https://github.com/thinkengineio/docs)
+[docs](https://github.com/thinkengineio/docs)
 
-**Sleuthgraph** came out of it and is open source: an OSINT investigation
-workbench, graph-native, built around pivots rather than search results.
+**Sleuthgraph** is the OSINT investigation workbench built on it, already open
+source. Graph-native, organised around pivots rather than search results.
 
 - [sleuthgraph](https://github.com/thinkengineio/sleuthgraph) — meta repo, docs, compose
 - [sleuthgraph-api](https://github.com/thinkengineio/sleuthgraph-api) — FastAPI, Postgres + AGE, plugin SDK

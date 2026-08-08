@@ -4,7 +4,7 @@ title: About
 permalink: /about/
 ---
 
-Sadik Erisen. Security engineer. Co-founder of ThinkEngine.
+Sadik Erisen. Security engineer.
 
 Three things overlap here and keep turning out to be the same problem.
 
