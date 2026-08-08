@@ -33,4 +33,7 @@ This site is the working notes. Research is what I'm on now, projects is what
 I've shipped, notes are short findings: what I tried, what held, what didn't,
 and what I'm not claiming.
 
+[ORCID](https://orcid.org/0009-0006-9637-6345) ·
+[GitHub](https://github.com/francose)
+
 Public work only. Nothing from the day job, nothing under review.
