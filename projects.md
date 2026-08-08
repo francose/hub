@@ -12,7 +12,7 @@ sourced at Comcast.
 
 [docs](https://github.com/thinkengineio/docs)
 
-## Sentinel
+## sentinel-maas
 
 Endpoint security agent, written in Go from scratch, cross-platform on macOS
 and Linux. Collects system and network telemetry, does CIS hardening checks,
