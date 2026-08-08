@@ -1,0 +1,12 @@
+---
+layout: default
+---
+<article class="sheet">
+  {%- if page.title -%}
+    <h2 class="headline">{{ page.title }}</h2>
+    <hr class="scotch">
+  {%- endif -%}
+  <div class="copy">
+    {{ content }}
+  </div>
+</article>

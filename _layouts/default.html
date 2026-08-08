@@ -1,0 +1,43 @@
+<!-- masthead, folio bar, section line, then the page -->
+{% seo %}
+{% feed_meta %}
+<link rel="stylesheet" href="{{ '/assets/css/paper.css' | relative_url }}">
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="masthead">
+  <p class="edition">Working notes and research index</p>
+  <h1 class="nameplate"><a href="{{ '/' | relative_url }}">{{ site.title }}</a></h1>
+
+  <div class="folio">
+    <span>No. {{ site.posts.size }}</span>
+    <span class="folio-mid">Adversarial ML &middot; OSINT &middot; Supply chain</span>
+    <span>
+      {%- if site.posts.size > 0 -%}
+        Latest {{ site.posts.first.date | date: "%d %B %Y" }}
+      {%- else -%}
+        Est. 2026
+      {%- endif -%}
+    </span>
+  </div>
+
+  <nav class="sections" aria-label="Sections">
+    {%- for path in site.header_pages -%}
+      {%- assign p = site.pages | where: "path", path | first -%}
+      {%- if p -%}<a href="{{ p.url | relative_url }}">{{ p.title }}</a>{%- endif -%}
+    {%- endfor -%}
+  </nav>
+</header>
+
+<main id="main">
+  {{ content }}
+</main>
+
+<footer class="colophon">
+  <p>
+    <a href="https://orcid.org/0009-0006-9637-6345">ORCID</a>
+    <a href="https://github.com/francose">GitHub</a>
+    <a href="{{ '/feed.xml' | relative_url }}">Feed</a>
+  </p>
+  <p class="setline">Set in Times and Georgia. Public work only.</p>
+</footer>

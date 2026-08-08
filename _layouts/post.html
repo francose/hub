@@ -1,0 +1,20 @@
+---
+layout: default
+---
+<article class="sheet">
+  {%- if page.tags.size > 0 -%}
+    <p class="kicker">{{ page.tags | join: " &middot; " }}</p>
+  {%- endif -%}
+
+  <h2 class="headline">{{ page.title }}</h2>
+
+  <p class="dateline">Filed {{ page.date | date: "%d %B %Y" }}</p>
+  <hr class="scotch">
+
+  <div class="copy dropcap">
+    {{ content }}
+  </div>
+
+  <hr class="rule-thin">
+  <p class="backlink"><a href="{{ '/notes/' | relative_url }}">More notes</a></p>
+</article>
