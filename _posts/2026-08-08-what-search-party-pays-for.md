@@ -14,6 +14,12 @@ Same rule as last time: no findings here. Search Party intel goes to law
 enforcement through Trace Labs, not onto a blog. Everything below is about
 method.
 
+For grounding: 25th of 110 teams, six submissions accepted and three rejected.
+Mid-field. Last event I finished 7th on a cold case, so this was a step
+backwards on a harder case type, and the reasons are not mysterious. Most of
+them are in this post. We did get pulled out of the random prize draw, which is
+not a skill.
+
 ## The thing I got most wrong
 
 I spent the first half of the window building analysis. Geocoded every
