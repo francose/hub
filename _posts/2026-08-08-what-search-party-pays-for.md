@@ -14,8 +14,8 @@ Same rule as last time: no findings here. Search Party intel goes to law
 enforcement through Trace Labs, not onto a blog. Everything below is about
 method.
 
-For grounding: 25th of 110 teams. The team put in 41 submissions and had 34
-accepted. Nine of those were mine, six accepted and three rejected.
+For grounding: 26th of 110 teams on 1430 points. The team put in 41 submissions
+and had 34 accepted. Nine of those were mine, six accepted and three rejected.
 Last event I finished 7th on a cold case, so this was a step backwards on a
 harder case type, and the reasons are not mysterious. Most of them are in this
 post. We also got pulled out of the random prize draw, which is not a skill.
