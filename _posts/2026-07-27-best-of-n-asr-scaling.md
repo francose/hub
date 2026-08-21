@@ -5,17 +5,27 @@ date: 2026-07-27 18:00:00 -0400
 tags: [ai-security, pyrit, jailbreak]
 ---
 
-I implemented Best-of-N (Hughes et al., arXiv:2412.03556) for PyRIT. The
-maintainer's condition was reasonable: don't port the paper on faith, show it
-works. So I ran it against live targets instead of citing the abstract.
+Most jailbreak numbers tell you more about how they were scored than about the
+model. Change what counts as a success and the same attack goes from marginal
+to devastating without a single prompt changing.
+
+The occasion for this was porting Best-of-N (Hughes et al., arXiv:2412.03556)
+to PyRIT. The maintainer's condition was reasonable: don't port the paper on
+faith, show it works. So I ran it against live targets instead of citing the
+abstract. But the port was the easy half. The part that took the thinking was
+building a measurement I would believe.
+
+Start with the scorer, because everything downstream inherits it. I used the
+`task_achieved_refined` true/false scorer, which asks one question: did the
+response fulfill the request, or refuse. The obvious alternative is the QA
+scorer, which asks whether the answer is correct. That is the wrong question
+for a jailbreak, because a well-formed refusal is a correct answer. Score with
+it and refusals land on the same side of the ledger as compliance.
 
 Setup was 15 objectives from the bundled scorer-eval sets across illegal
 activity, cyber, phishing, harassment and misinformation. Sigma 0.4, one
 augmented sample per attempt, loop until something breaks through, record the
-first-success index. Scoring used the `task_achieved_refined` true/false
-scorer, which asks whether the response fulfilled the request or refused. Not
-the QA scorer, which asks whether the answer is correct and inflates
-everything, because a well-formed refusal is still a correct answer.
+first-success index.
 
 Against gpt-4o-mini, judged by gemini-2.5-flash: 20% at N=1, 27% at N=2, 47% at
 N=4, 47% at N=8, 60% at N=16. Keep re-sampling augmented variants and refusals
@@ -42,5 +52,13 @@ N everywhere" and not as a ranking.
 One target was simply unreadable: gpt-5.5 rejects at an API-level policy filter
 before the model sees the prompt. That's a vendor input classifier, not a model
 refusal, and measuring it would answer a different question.
+
+The scaling result itself was never in doubt. Hughes et al. established it at
+far more samples than I ran, and my job was to corroborate it, not to discover
+it. What I wanted out of the exercise was knowing which parts of an ASR number
+are load bearing and which are an artifact of the harness around it. Pick a
+scorer that counts refusals as wins, let a target grade its own output, skip
+reading the transcripts, and you can put almost any curve on a slide. The
+attack was the smaller problem.
 
 [PR #2277](https://github.com/microsoft/PyRIT/pull/2277)
