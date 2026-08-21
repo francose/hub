@@ -63,8 +63,8 @@ attack was the smaller problem.
 
 [PR #2277](https://github.com/microsoft/PyRIT/pull/2277)
 
-*There's an expanded edition of this note on
-[my Substack](https://jynx84999.substack.com/), with the full per-target
-results table and more on how the runs were scored. This version stays the
-maintained technical record: corrections, artifact links and upstream
-contribution status land here first.*
+*The reader-facing version of this work,
+["An attack success rate is not a property of a model"](https://jynx84999.substack.com/p/an-attack-success-rate-is-not-a-property),
+is on my Substack, with the full per-target results table and more on how the
+runs were scored. This version stays the maintained technical record:
+corrections, artifact links and upstream contribution status land here first.*
