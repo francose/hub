@@ -9,8 +9,8 @@ Most jailbreak numbers tell you more about how they were scored than about the
 model. Change what counts as a success and the same attack goes from marginal
 to devastating without a single prompt changing.
 
-The occasion for this was porting Best-of-N (Hughes et al., arXiv:2412.03556)
-to PyRIT. The maintainer's condition was reasonable: don't port the paper on
+The occasion for this was porting Best-of-N
+([Hughes et al., arXiv:2412.03556](https://arxiv.org/abs/2412.03556)) to PyRIT. The maintainer's condition was reasonable: don't port the paper on
 faith, show it works. So I ran it against live targets instead of citing the
 abstract. But the port was the easy half. The part that took the thinking was
 building a measurement I would believe.
