@@ -46,7 +46,7 @@ What I'm not claiming. This is one run at N=16; Hughes et al. went to roughly
 it. To keep targets off their own judge I scored OpenAI targets with Gemini and
 Google targets with gpt-4o-mini, which means cross-vendor absolute numbers
 aren't comparable. The within-row trend is the solid part. At 15 objectives the
-gaps between models sit inside the noise, so read the tables as "ASR rises with
+gaps between models sit inside the noise, so read the numbers as "ASR rises with
 N everywhere" and not as a ranking.
 
 One target was simply unreadable: gpt-5.5 rejects at an API-level policy filter
