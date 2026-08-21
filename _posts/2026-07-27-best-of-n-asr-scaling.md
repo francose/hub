@@ -62,3 +62,8 @@ reading the transcripts, and you can put almost any curve on a slide. The
 attack was the smaller problem.
 
 [PR #2277](https://github.com/microsoft/PyRIT/pull/2277)
+
+*A longer edition of this note, with the full per-target results table, runs on
+[my Substack](https://jynx84999.substack.com/). This version stays the
+maintained technical record: corrections, artifact links and upstream
+contribution status land here first.*
