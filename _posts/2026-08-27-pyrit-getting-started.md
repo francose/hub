@@ -46,8 +46,9 @@ mine. That is worth more than a standalone tool nobody installs.
 
 Anyone who has to answer "is this model safe enough to ship" with evidence.
 Red teamers who are already doing this by hand and want the results to survive
-contact with a second person. Anyone building an eval harness from scratch right
-now, because you are about to rebuild a worse version of this.
+contact with a second person. And anyone about to build an eval harness from
+scratch, if only to see what you would be reimplementing before you commit to
+it.
 
 If you just want to jailbreak a chatbot for fun, this is too much machinery. Use
 a browser.
