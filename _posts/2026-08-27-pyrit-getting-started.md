@@ -30,19 +30,25 @@ Everything else in PyRIT is a variation on those five.
 
 The strongest thing PyRIT gives you is comparability. Attacks are the easy part,
 most published ones are a few dozen lines. Producing a result that someone else
-can reproduce is the hard part, and that is what the framework is built around.
+can reproduce is the hard part, and that is the problem this framework actually
+solves.
 
-Writing your own harness is easy and that is the problem. You end up with a
-script that sends prompts, eyeballs the output, and produces a number nobody else
-can reproduce, including you in three months. PyRIT gives you a memory database
-with every prompt, response and score in it, scorers that are named things rather
-than a regex for "I can't help with that", and a target abstraction that means
-swapping gpt-4o for a local model is one environment variable rather than a
-rewrite.
+It solves it well. Every prompt, response and score lands in a memory database
+you can query afterward, so a run is an artifact rather than a scrollback buffer.
+Scorers are named, documented components instead of a regex for "I can't help
+with that". Targets sit behind one abstraction, which means OpenAI, Azure,
+Anthropic, Google, HuggingFace, raw HTTP endpoints, WebSockets and
+Playwright-driven web apps are all the same shape to your code, and swapping
+gpt-4o for a model on your laptop is one environment variable rather than a
+rewrite. The scorers compose, which matters more than it sounds like it should,
+and I will come back to that.
 
-It is also where the work accumulates. When I put Best-of-N into it, what landed
-was a converter anyone can compose into an attack that has nothing to do with
-mine. That is worth more than a standalone tool nobody installs.
+It is also a project that takes contributions seriously. When I submitted
+Best-of-N, a maintainer reshaped it onto PyRIT's technique abstraction and merged
+it, which produced a better result than the patch I sent. Papers get cited
+properly in `references.bib`. That kind of care is why the work accumulates here
+instead of scattering across a hundred one-off repos, and it is a large part of
+why I would rather put a technique into this than publish my own tool.
 
 ## Who should be using it
 
@@ -201,6 +207,13 @@ last_score     : TrueFalseInverterScorer: refusal: True
 Same prompt, same model, same harness, opposite verdict. One wrapper. This is the
 whole reason I keep writing about scoring: the attack was never the variable.
 
+That is the composability paying off. Scorers are primitives you assemble, so
+between `TrueFalseInverterScorer` and `TrueFalseCompositeScorer` you can build
+the exact question you mean rather than going looking for a scorer that happens
+to ask it. Most harnesses make you fork something to get this. Here it is a
+constructor argument, and the resulting wiring is visible in your code, which
+means a reviewer can see what you counted as success without reading your mind.
+
 ## Moving to a hosted model
 
 Nothing above changes. Point the same three variables somewhere else:
@@ -230,3 +243,8 @@ One note on versions. `CharNoiseConverter` and the Best-of-N technique
 [merged upstream](https://github.com/microsoft/PyRIT/pull/2277) tonight, but they
 are on `main` and 1.0.1 predates them. `pip install pyrit` does not get them yet.
 They ride the next release.
+
+PyRIT is worth the hour it takes to get comfortable with. It is open source,
+actively maintained, and the documentation is genuinely good once you know which
+branch you are reading. The fastest way in is the one above: point it at a model
+on your own machine and look at what it records.
