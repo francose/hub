@@ -16,7 +16,8 @@ short version: it is the plumbing between a prompt and a verdict. You give it a
 target, an objective, and a way to score the answer, and it runs the loop and
 writes everything to a database you can query afterward.
 
-The pieces are worth naming because the docs assume them. A **target** is
+The pieces are worth naming up front, because everything else is composed out of
+them. A **target** is
 whatever you are testing, an OpenAI endpoint, a local model, an HTTP API, a web
 app driven through Playwright. A **converter** transforms a prompt before it is
 sent, base64, ROT13, character noise. A **scorer** decides whether a response
@@ -27,8 +28,9 @@ Everything else in PyRIT is a variation on those five.
 
 ## Why it is worth using
 
-The honest case for PyRIT is not that it has clever attacks in it. Most published
-attacks are a few dozen lines. The case is that it makes results comparable.
+The strongest thing PyRIT gives you is comparability. Attacks are the easy part,
+most published ones are a few dozen lines. Producing a result that someone else
+can reproduce is the hard part, and that is what the framework is built around.
 
 Writing your own harness is easy and that is the problem. You end up with a
 script that sends prompts, eyeballs the output, and produces a number nobody else
@@ -50,8 +52,8 @@ contact with a second person. And anyone about to build an eval harness from
 scratch, if only to see what you would be reimplementing before you commit to
 it.
 
-If you just want to jailbreak a chatbot for fun, this is too much machinery. Use
-a browser.
+If you just want to poke at a chatbot for an afternoon, you do not need a
+framework for that.
 
 ## Install
 
@@ -65,8 +67,8 @@ pip install pyrit
 ```
 
 That gets you the latest release from PyPI, which is 1.0.1 as of tonight. Confirm
-it, because PyRIT's docs on the website track the `main` branch and drift ahead of
-the release you just installed:
+it, because the website documents the `main` branch, which runs ahead of the
+latest release:
 
 ```bash
 python -c "import pyrit; print(pyrit.__version__)"
@@ -173,10 +175,11 @@ model did not refuse. It wrote the poem. And the run is marked FAILURE.
 Nothing is broken. As an objective scorer, `SelfAskRefusalScorer` defines success
 as "the response was a refusal." Compliance is failure by that definition. If you
 are measuring how well a model holds the line, that is exactly right. If you are
-measuring whether an attack got through, you have just built a harness that
-reports your successes as failures.
+measuring whether an attack got through, you want the opposite polarity, and you
+have to say so.
 
-Wrap it to flip it. Same script, one substitution:
+PyRIT gives you that as a wrapper rather than a second scorer to write. Same
+script, one substitution:
 
 ```python
 from pyrit.score import TrueFalseInverterScorer
