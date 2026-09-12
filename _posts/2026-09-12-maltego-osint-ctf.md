@@ -1,7 +1,8 @@
 ---
 layout: post
 date: 2026-09-12 12:00:00 -0400
-title: "Notes from a Maltego OSINT CTF"
+title: "The hardest part of an OSINT CTF isn't the OSINT"
+description: "Notes from the Maltego CTF: the gap between an answer you can prove and one the checker will accept."
 tags: [osint, ctf, methodology]
 ---
 

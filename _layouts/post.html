@@ -8,6 +8,10 @@ layout: default
 
   <h2 class="headline">{{ page.title }}</h2>
 
+  {%- if page.description -%}
+    <p class="standfirst">{{ page.description }}</p>
+  {%- endif -%}
+
   <p class="dateline">Filed {{ page.date | date: "%d %B %Y" }}</p>
   <hr class="scotch">
 
