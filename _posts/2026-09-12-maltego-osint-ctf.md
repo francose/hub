@@ -1,6 +1,6 @@
 ---
 layout: post
-date: 2026-09-12 20:30:00 -0400
+date: 2026-09-12 12:00:00 -0400
 title: "Notes from a Maltego OSINT CTF"
 tags: [osint, ctf, methodology]
 ---
