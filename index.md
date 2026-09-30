@@ -26,8 +26,10 @@ team cert. Attacking LLMs, RAG pipelines and multi-agent systems is the same
 problem I spend the rest of my time on, so it lines up.
 
 MSE in Software Systems and Cybersecurity from Penn. CISSP, CEH, Security+,
-CCNA. One [preprint]({{ '/publications/' | relative_url }}) so far, on
-out-of-bounds memory access in Zig across build modes.
+CCNA. Two [preprints]({{ '/publications/' | relative_url }}) so far: one on
+out-of-bounds memory access in Zig across build modes, and one with Todd
+Outten on whether seccomp argument-inspection gates actually contain LLM
+agents.
 
 This site is the working notes. Research is what I'm on now, projects is what
 I've shipped, notes are short findings: what I tried, what held, what didn't,

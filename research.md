@@ -28,6 +28,10 @@ An agent that can reach the network makes most other controls advisory.
 Capability scoping, token exchange, and treating egress as the control plane
 rather than sandboxing as a checkbox.
 
+The syscall side of it is written up with Todd Outten: whether a seccomp
+argument-inspection gate actually contains an agent, and what does. See
+[publications]({{ '/publications/' | relative_url }}).
+
 ## Supply chain
 
 Contributions to Google's OSV tooling. A crash fix in the scanner's version
