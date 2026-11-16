@@ -2,7 +2,7 @@
 layout: post
 date: 2026-11-16 14:35:00 -0500
 title: "Your agent should not hold a credential"
-description: "Design for an agent authority ledger on Hyperledger Fabric 3: every tool call authorized by chaincode before it runs, a proxy you don't have to trust, and the ten attacks I'll run against it."
+description: "Design for an agent authority ledger on Hyperledger Fabric 3: every tool call authorized by chaincode before it runs, a proxy you don't have to trust, and the twelve attacks I'll run against it."
 tags: [ai-security, agents, hyperledger, zero-trust]
 ---
 
@@ -125,7 +125,9 @@ the LLM process never sees it.
 The ledger holds five key spaces: `agent:[id]`, `policy:[id]`,
 `grant:[nonce]`, `action:[nonce]`, and `revocation:[id]`. Raw arguments go
 to a private data collection keyed by the same nonce; only the hash is on
-the channel. A grant is written once and consumed once.
+the channel. A grant is written once and consumed once, and the consumption
+happens before execution, not after. The next section says why that order
+matters.
 
 Why Fabric 3 and not the 2.5 LTS: 3.0 added the BFT ordering service and 3.1
 added Ed25519. The Byzantine-orderer test in the matrix needs the first.
@@ -154,6 +156,18 @@ against a grant that exists on the channel, and the credential carries the
 nonce. The tool checks the credential and the args hash itself. A direct
 call, a spoofed address, or a compromised proxy without a grant now all fail
 the same way, and the proxy becomes one ledger client among others.
+
+One more step closes the hole a compromised proxy still has. Tools hold
+their own Fabric identities, enrolled the same way as agents, and before a
+tool runs anything it claims the nonce on the channel with
+`Claim(nonce, argsHash)`. The chaincode rejects a claim on a grant that is
+missing, denied, expired, already claimed, or carries a different hash, and
+Fabric's MVCC validation turns two concurrent claims into exactly one
+commit. `Record` then closes the claim. If the nonce were consumed only at
+`Record`, after execution, the proxy could replay one authorized call
+against the tool as many times as it liked, or skip `Record` entirely; a
+claim with no record inside a deadline is its own alarm. Credit to the
+Codex reviewer on the hub PR for catching the ordering.
 
 An agent that refuses the proxy outright gets nowhere. It has no Fabric
 identity, so it can't call `Authorize`. No grant, so the broker won't mint.
@@ -218,15 +232,15 @@ and the design doesn't answer it.
 
 ## The test plan
 
-Ten attacks, each crossing one trust boundary. B1 is agent to proxy, B2 is
-proxy to tool, B3 is proxy to ledger, B4 is inside the ledger. The expected
-control is the claim under test. None of these have run.
+Twelve attacks, each crossing one trust boundary. B1 is agent to proxy, B2
+is proxy to tool, B3 is proxy to ledger, B4 is inside the ledger. The
+expected control is the claim under test. None of these have run.
 
 | # | Attack | Boundary | Expected control |
 | --- | --- | --- | --- |
 | 1 | Prompt injection calls an unregistered tool | B1 | Policy denies; a deny grant lands on the ledger |
 | 2 | Argument tampering after authorize (TOCTOU) | B2 | Proxy executes only the authorized hash; the tool re-checks it |
-| 3 | Nonce replay | B1 | Single-use nonce, consumed by Record |
+| 3 | Nonce replay | B1 | Nonce claimed on the channel before execution; a second claim is rejected |
 | 4 | Revocation latency | B3 | Revoke commits in one block; the next Authorize denies |
 | 5 | Compromised peer endorses everything | B4 | Endorsement needs both orgs; ENDORSEMENT_POLICY_FAILURE at validation |
 | 6 | Stolen agent certificate | B3 | Short-lived cert, fingerprint bound to the agent, channel CRL |
@@ -234,6 +248,8 @@ control is the claim under test. None of these have run.
 | 8 | Proxy bypass, direct to tool | B2 | Tool demands a nonce-bound credential |
 | 9 | Authorize flooding | B1 | Per-agent rate limit in the proxy, per-agent quota in chaincode |
 | 10 | Agent calls Authorize with its own identity | B1 | Allowed only where policy allows; the tool still checks the hash |
+| 11 | Compromised proxy replays one grant concurrently | B2 | Exactly one Claim commits; the rest fail MVCC validation and the tool refuses |
+| 12 | Compromised proxy executes and never records | B2 | Claim with no record inside the deadline raises an alert and revokes the proxy identity |
 
 Row 10 is the one I care about. If it passes, the proxy isn't load-bearing,
 and that was the point of the design.
@@ -244,9 +260,9 @@ In order, each runnable before the next starts: the Fabric 3.1 test-network
 with four BFT orderers; the `agentauth` chaincode in Go; the MCP proxy; any
 MCP-speaking agent pointed at it; one harness script per row above.
 
-Three things are open before I write the chaincode. Whether the proxy waits
-on endorsement or on commit, since one block interval per tool call is the
-latency bill. Whether the policy language stays a per-tool allow-list with
+Three things are open before I write the chaincode. Whether the proxy and
+the tool wait on endorsement or on commit, since Authorize and Claim each
+cost a block interval per tool call and that is the latency bill. Whether the policy language stays a per-tool allow-list with
 argument regexes or moves to Cedar evaluated inside chaincode, with the
 determinism risk that brings. And whether the broker enrolls one identity
 per agent instance or per task.
