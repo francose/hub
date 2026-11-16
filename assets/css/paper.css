@@ -193,6 +193,8 @@ hr.rule-thin {
 }
 .copy pre code { background: none; padding: 0; }
 
+.copy img { display: block; max-width: 100%; height: auto; margin: 0 0 1.3rem; }
+
 .copy table { width: 100%; border-collapse: collapse; margin: 0 0 1.3rem; font-size: .92rem; }
 .copy th, .copy td { border-bottom: 1px solid var(--ink-faint); padding: .4rem .5rem; text-align: left; }
 .copy th { font-family: var(--display); text-transform: uppercase; letter-spacing: .1em; font-size: .72rem; }

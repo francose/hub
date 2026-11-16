@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 428" width="760" height="428" role="img" aria-label="Every tool call passes the proxy, which asks the ledger first" font-family="Georgia, 'Iowan Old Style', 'Palatino Linotype', serif" font-size="11.5">
+  <defs>
+    <marker id="arch-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0 0L10 5L0 10z" fill="#55503f"/>
+    </marker>
+  </defs>
+  <text x="24" y="34" font-size="15" font-weight="700" fill="#14110d">Every tool call passes the proxy, which asks the ledger first</text>
+  <g fill="none" stroke="#55503f" stroke-width="1.25">
+    <path d="M200 104H272" marker-end="url(#arch-arrow)"/>
+    <path d="M488 104H560" marker-end="url(#arch-arrow)"/>
+    <path d="M340 140V172H144V220" marker-end="url(#arch-arrow)"/>
+    <path d="M616 220V172H420V140" marker-end="url(#arch-arrow)"/>
+    <path d="M144 348V292" marker-end="url(#arch-arrow)"/>
+  </g>
+  <g>
+    <rect x="24" y="68" width="176" height="72" rx="8" fill="none" stroke="#55503f" stroke-width="1.25"/>
+    <text x="112" y="92" text-anchor="middle" font-size="13" font-weight="700" fill="#14110d">Agent</text>
+    <text x="112" y="108" text-anchor="middle" fill="#14110d">LLM + MCP client</text>
+    <text x="112" y="124" text-anchor="middle" fill="#55503f">holds no credentials</text>
+  </g>
+  <g>
+    <rect x="272" y="68" width="216" height="72" rx="8" fill="#14110d" fill-opacity="0.08" stroke="#14110d" stroke-width="2"/>
+    <text x="380" y="92" text-anchor="middle" font-size="13" font-weight="700" fill="#14110d">MCP proxy (Go)</text>
+    <text x="380" y="108" text-anchor="middle" fill="#14110d">Fabric Gateway client</text>
+    <text x="380" y="124" text-anchor="middle" fill="#55503f">holds tool credentials</text>
+  </g>
+  <g>
+    <rect x="560" y="68" width="176" height="72" rx="8" fill="none" stroke="#55503f" stroke-width="1.25"/>
+    <text x="648" y="92" text-anchor="middle" font-size="13" font-weight="700" fill="#14110d">Tools</text>
+    <text x="648" y="108" text-anchor="middle" fill="#14110d">shell, HTTP, DB</text>
+    <text x="648" y="124" text-anchor="middle" fill="#55503f">no direct agent path</text>
+  </g>
+  <text x="236" y="58" text-anchor="middle" fill="#55503f">tool call (MCP)</text>
+  <text x="524" y="58" text-anchor="middle" fill="#55503f">execute if allowed</text>
+  <text x="242" y="166" text-anchor="middle" fill="#55503f">Authorize, Record</text>
+  <text x="518" y="166" text-anchor="middle" fill="#55503f">enroll agent identity</text>
+  <g>
+    <rect x="24" y="188" width="712" height="120" rx="8" fill="#14110d" fill-opacity="0.04" stroke="#55503f" stroke-width="1.25"/>
+    <text x="380" y="210" text-anchor="middle" font-size="13" font-weight="700" fill="#14110d">Fabric 3.1 channel, SmartBFT ordering</text>
+    <rect x="40" y="220" width="208" height="72" rx="8" fill="none" stroke="#55503f" stroke-width="1.25"/>
+    <text x="144" y="244" text-anchor="middle" font-size="13" font-weight="700" fill="#14110d">Peers (Org1, Org2)</text>
+    <text x="144" y="260" text-anchor="middle" fill="#14110d">agentauth chaincode</text>
+    <text x="144" y="276" text-anchor="middle" fill="#55503f">endorsement: both orgs</text>
+    <rect x="276" y="220" width="208" height="72" rx="8" fill="none" stroke="#55503f" stroke-width="1.25"/>
+    <text x="380" y="244" text-anchor="middle" font-size="13" font-weight="700" fill="#14110d">Orderers x4</text>
+    <text x="380" y="260" text-anchor="middle" fill="#14110d">SmartBFT, tolerates f = 1</text>
+    <text x="380" y="276" text-anchor="middle" fill="#55503f">total order of decisions</text>
+    <rect x="512" y="220" width="208" height="72" rx="8" fill="none" stroke="#55503f" stroke-width="1.25"/>
+    <text x="616" y="244" text-anchor="middle" font-size="13" font-weight="700" fill="#14110d">Fabric CA</text>
+    <text x="616" y="260" text-anchor="middle" fill="#14110d">short-lived X.509 per agent</text>
+    <text x="616" y="276" text-anchor="middle" fill="#55503f">Ed25519 or ECDSA keys</text>
+  </g>
+  <g>
+    <rect x="40" y="348" width="208" height="56" rx="8" fill="none" stroke="#55503f" stroke-width="1.25"/>
+    <text x="144" y="372" text-anchor="middle" font-size="13" font-weight="700" fill="#14110d">Policy admin</text>
+    <text x="144" y="388" text-anchor="middle" fill="#55503f">sets policy, revokes agents</text>
+  </g>
+  <text x="154" y="326" fill="#55503f">SetPolicy, Revoke</text>
+</svg>
