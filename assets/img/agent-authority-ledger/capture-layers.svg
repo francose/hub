@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 452" width="760" height="452" role="img" aria-label="Three capture layers: two gate the action, one anchors the evidence" font-family="Georgia, 'Iowan Old Style', 'Palatino Linotype', serif" font-size="11.5">
+  <defs>
+    <marker id="cap-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0 0L10 5L0 10z" fill="#55503f"/>
+    </marker>
+    <marker id="cap-arrow-ink" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0 0L10 5L0 10z" fill="#14110d"/>
+    </marker>
+  </defs>
+  <text x="24" y="34" font-size="15" font-weight="700" fill="#14110d">Three capture layers: two gate the action, one anchors the evidence</text>
+  <text x="24" y="76" font-weight="700" fill="#55503f">Intent: what the agent asked for</text>
+  <text x="24" y="196" font-weight="700" fill="#55503f">Authority: what it was allowed to use</text>
+  <text x="24" y="316" font-weight="700" fill="#55503f">Effect: what it actually did</text>
+  <g fill="none" stroke="#14110d" stroke-width="2">
+    <path d="M284 128H420" marker-end="url(#cap-arrow-ink)"/>
+    <path d="M284 248H420" marker-end="url(#cap-arrow-ink)"/>
+  </g>
+  <path d="M284 368H420" fill="none" stroke="#55503f" stroke-width="1.25" stroke-dasharray="4 3" marker-end="url(#cap-arrow)"/>
+  <text x="352" y="120" text-anchor="middle" fill="#55503f">sync gate</text>
+  <text x="352" y="240" text-anchor="middle" fill="#55503f">sync gate</text>
+  <text x="352" y="360" text-anchor="middle" fill="#55503f">async anchor</text>
+  <g>
+    <rect x="24" y="84" width="260" height="88" rx="8" fill="none" stroke="#55503f" stroke-width="1.25"/>
+    <text x="154" y="108" text-anchor="middle" font-size="13" font-weight="700" fill="#14110d">MCP proxy (tool-call hook)</text>
+    <text x="154" y="124" text-anchor="middle" fill="#14110d">sees tool + canonical args</text>
+    <text x="154" y="140" text-anchor="middle" fill="#14110d">Authorize commits before execute</text>
+    <text x="154" y="156" text-anchor="middle" fill="#55503f">deny means nothing runs</text>
+  </g>
+  <g>
+    <rect x="24" y="204" width="260" height="88" rx="8" fill="none" stroke="#55503f" stroke-width="1.25"/>
+    <text x="154" y="228" text-anchor="middle" font-size="13" font-weight="700" fill="#14110d">Cred broker (Vault or SPIRE)</text>
+    <text x="154" y="244" text-anchor="middle" fill="#14110d">mints a short-lived cred per grant</text>
+    <text x="154" y="260" text-anchor="middle" fill="#14110d">cred carries the grant nonce</text>
+    <text x="154" y="276" text-anchor="middle" fill="#55503f">tools accept the cred, not an IP</text>
+  </g>
+  <g>
+    <rect x="24" y="324" width="260" height="88" rx="8" fill="none" stroke="#55503f" stroke-width="1.25"/>
+    <text x="154" y="348" text-anchor="middle" font-size="13" font-weight="700" fill="#14110d">eBPF probe on the cgroups</text>
+    <text x="154" y="364" text-anchor="middle" fill="#14110d">agent and tool cgroups</text>
+    <text x="154" y="380" text-anchor="middle" fill="#14110d">execve, connect, openat</text>
+    <text x="154" y="396" text-anchor="middle" fill="#55503f">hash-chained; root per second</text>
+  </g>
+  <g>
+    <rect x="404" y="52" width="332" height="376" rx="8" fill="#14110d" fill-opacity="0.04" stroke="#55503f" stroke-width="1.25"/>
+    <text x="420" y="74" font-size="13" font-weight="700" fill="#14110d">Fabric channel (write-once keys)</text>
+    <rect x="420" y="84" width="300" height="88" rx="8" fill="none" stroke="#55503f" stroke-width="1.25"/>
+    <text x="570" y="108" text-anchor="middle" font-size="13" font-weight="700" fill="#14110d">grant:[nonce]</text>
+    <text x="570" y="124" text-anchor="middle" fill="#14110d">agent, tool, argsHash, decision</text>
+    <text x="570" y="140" text-anchor="middle" fill="#14110d">write-once; commit gates execution</text>
+    <text x="570" y="156" text-anchor="middle" fill="#55503f">cost: one block per tool call</text>
+    <rect x="420" y="204" width="300" height="88" rx="8" fill="none" stroke="#55503f" stroke-width="1.25"/>
+    <text x="570" y="228" text-anchor="middle" font-size="13" font-weight="700" fill="#14110d">cred:[nonce]</text>
+    <text x="570" y="244" text-anchor="middle" fill="#14110d">cred fingerprint, tool, expiry</text>
+    <text x="570" y="260" text-anchor="middle" fill="#14110d">write-once; commit gates issuance</text>
+    <text x="570" y="276" text-anchor="middle" fill="#55503f">cost: one block per task</text>
+    <rect x="420" y="324" width="300" height="88" rx="8" fill="none" stroke="#55503f" stroke-width="1.25"/>
+    <text x="570" y="348" text-anchor="middle" font-size="13" font-weight="700" fill="#14110d">anchor:[window]</text>
+    <text x="570" y="364" text-anchor="middle" fill="#14110d">Merkle root, event count, cgroup id</text>
+    <text x="570" y="380" text-anchor="middle" fill="#14110d">append-only; proves events after the fact</text>
+    <text x="570" y="396" text-anchor="middle" fill="#55503f">cost: none on the action path</text>
+  </g>
+</svg>
