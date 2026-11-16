@@ -2,7 +2,7 @@
 layout: post
 date: 2026-11-16 14:35:00 -0500
 title: "Your agent should not hold a credential"
-description: "Design for an agent authority ledger on Hyperledger Fabric 3: every tool call authorized by chaincode before it runs, a proxy you don't have to trust, and the twelve attacks I'll run against it."
+description: "Design for an agent authority ledger on Hyperledger Fabric 3: every tool call authorized by chaincode before it runs, a proxy you don't have to trust, and the thirteen attacks I'll run against it."
 tags: [ai-security, agents, hyperledger, zero-trust]
 ---
 
@@ -152,22 +152,29 @@ an IP allowlist on the tool network stops none of them.
 
 The fix is structural: tools stop trusting the proxy and trust the ledger. A
 credential broker (Vault or SPIRE) mints a short-lived credential only
-against a grant that exists on the channel, and the credential carries the
-nonce. The tool checks the credential and the args hash itself. A direct
-call, a spoofed address, or a compromised proxy without a grant now all fail
-the same way, and the proxy becomes one ledger client among others.
+against a grant that has committed as VALID, whose decision is allow, and
+that nobody has claimed yet; a deny grant is on the same ledger and buys
+nothing. The credential carries the nonce. The tool checks the credential
+and the args hash itself, which means each tool fronts a small verifier (an
+enforcing adapter for a shell, an HTTP service, or a database that can't do
+this natively). A direct call, a spoofed address, or a compromised proxy
+without an allow grant now all fail the same way, and the proxy becomes one
+ledger client among others.
 
-One more step closes the hole a compromised proxy still has. Tools hold
-their own Fabric identities, enrolled the same way as agents, and before a
-tool runs anything it claims the nonce on the channel with
+Two more steps close the holes a compromised proxy still has. Tools hold
+their own Fabric identities, enrolled the same way as agents. Before a tool
+runs anything it claims the nonce on the channel with
 `Claim(nonce, argsHash)`. The chaincode rejects a claim on a grant that is
 missing, denied, expired, already claimed, or carries a different hash, and
 Fabric's MVCC validation turns two concurrent claims into exactly one
-commit. `Record` then closes the claim. If the nonce were consumed only at
-`Record`, after execution, the proxy could replay one authorized call
-against the tool as many times as it liked, or skip `Record` entirely; a
-claim with no record inside a deadline is its own alarm. Credit to the
-Codex reviewer on the hub PR for catching the ordering.
+commit. After execution the tool itself, not the proxy, calls
+`Record(nonce, resultHash)` under its own identity. If the nonce were
+consumed only at `Record`, after execution, the proxy could replay one
+authorized call against the tool as many times as it liked; if the proxy
+wrote `Record`, it could skip it or fabricate the result hash. A claim with
+no record inside a deadline is its own alarm, whoever caused it. Credit to
+the Codex and Copilot reviewers on the hub PR for catching the ordering and
+the authorship.
 
 An agent that refuses the proxy outright gets nowhere. It has no Fabric
 identity, so it can't call `Authorize`. No grant, so the broker won't mint.
@@ -188,7 +195,7 @@ world, and only some of them can wait for a block.
 | --- | --- | --- |
 | Model I/O | Inference gateway in front of the LLM | Yes, tens per minute |
 | Tool call | MCP proxy, or the framework's tool-dispatch hook | Yes, the natural grain |
-| Credential | Vault or SPIRE issuing against a ledger grant | Yes, and tools need no changes |
+| Credential | Vault or SPIRE issuing against a ledger grant | Yes, with a thin verifier in front of each tool |
 | Network | Envoy ext_authz or a CNI policy on all egress | Borderline, hundreds per second under load |
 | Kernel | seccomp-notify, eBPF LSM, Tetragon | No, thousands per second |
 
@@ -224,16 +231,23 @@ channel config:
 - Action records stay out of private data collections. Fabric 2.5 and later
   can purge those, which is a feature for GDPR and a bug for an audit log.
 
-And be exact about the guarantee. Irreversible here means it takes collusion
-of a quorum of orgs plus more than f orderers. In a single-enterprise
-deployment the orgs are security, platform, and the owning application team.
-Whether those three colluding is in your threat model is a question for you,
-and the design doesn't answer it.
+And be exact about the guarantee, because it is three guarantees with three
+different attackers. World state stays put as long as the orgs in the
+endorsement policy don't collude: if they do, they can endorse an overwrite,
+or ship a chaincode version that allows one, and honest orderers will order
+it, because ordering doesn't judge content. Ordering safety (no fork, no
+stall) holds as long as no more than f orderers are hostile. And block
+history survives both: an overwrite that got through is still a new block
+after the old one, in every org's copy, so tamper evidence outlives
+immutability. In a single-enterprise deployment the endorsing orgs are
+security, platform, and the owning application team. Whether those three
+colluding is in your threat model is a question for you, and the design
+doesn't answer it.
 
 ## The test plan
 
-Twelve attacks, each crossing one trust boundary. B1 is agent to proxy, B2
-is proxy to tool, B3 is proxy to ledger, B4 is inside the ledger. The
+Thirteen attacks, each crossing one trust boundary. B1 is agent to proxy,
+B2 is proxy to tool, B3 is proxy to ledger, B4 is inside the ledger. The
 expected control is the claim under test. None of these have run.
 
 | # | Attack | Boundary | Expected control |
@@ -249,7 +263,8 @@ expected control is the claim under test. None of these have run.
 | 9 | Authorize flooding | B1 | Per-agent rate limit in the proxy, per-agent quota in chaincode |
 | 10 | Agent calls Authorize with its own identity | B1 | Allowed only where policy allows; the tool still checks the hash |
 | 11 | Compromised proxy replays one grant concurrently | B2 | Exactly one Claim commits; the rest fail MVCC validation and the tool refuses |
-| 12 | Compromised proxy executes and never records | B2 | Claim with no record inside the deadline raises an alert and revokes the proxy identity |
+| 12 | Compromised proxy drops or forges the result | B2 | Record is written by the tool under its own identity; a claim with no record inside the deadline raises an alert |
+| 13 | Compromised proxy trades a deny grant for a credential | B3 | Broker and Claim both require decision = allow; a deny grant mints nothing |
 
 Row 10 is the one I care about. If it passes, the proxy isn't load-bearing,
 and that was the point of the design.
@@ -260,12 +275,14 @@ In order, each runnable before the next starts: the Fabric 3.1 test-network
 with four BFT orderers; the `agentauth` chaincode in Go; the MCP proxy; any
 MCP-speaking agent pointed at it; one harness script per row above.
 
-Three things are open before I write the chaincode. Whether the proxy and
-the tool wait on endorsement or on commit, since Authorize and Claim each
-cost a block interval per tool call and that is the latency bill. Whether the policy language stays a per-tool allow-list with
-argument regexes or moves to Cedar evaluated inside chaincode, with the
-determinism risk that brings. And whether the broker enrolls one identity
-per agent instance or per task.
+Three things are open before I write the chaincode. How to pay the latency
+bill: Authorize and Claim each have to commit as VALID before anything moves
+(an endorsed transaction can still fail validation against a revocation
+that landed first), so the knobs are the orderer's batch timeout and block
+size, not whether to wait. Whether the policy language stays a per-tool
+allow-list with argument regexes or moves to Cedar evaluated inside
+chaincode, with the determinism risk that brings. And whether the broker
+enrolls one identity per agent instance or per task.
 
 Adjacent work I'll compare against: Caracal, an LF Decentralized Trust lab
 that lists the same properties (policy-based authorization, least-privilege
